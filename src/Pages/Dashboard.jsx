@@ -46,9 +46,9 @@ function Dashboard() {
         } else if (modalId === 'modal2') {
           setModal2Visible(true);
         }else if (modalId === 'modal3') {
-            setModal2Visible(true);
+            setModal3Visible(true);
           }else if (modalId === 'modal4') {
-            setModal2Visible(true);
+            setModal4Visible(true);
           }
       };
     
@@ -57,10 +57,10 @@ function Dashboard() {
           setModal1Visible(false);
         } else if (modalId === 'modal2') {
           setModal2Visible(false);
-        }else if (modalId === 'modal2') {
-            setModal2Visible(false);
-          }else if (modalId === 'modal2') {
-            setModal2Visible(false);
+        }else if (modalId === 'modal3') {
+            setModal3Visible(false);
+          }else if (modalId === 'modal4') {
+            setModal4Visible(false);
           }
       };
 
@@ -74,18 +74,33 @@ function Dashboard() {
       {modal1Visible && (
         <div className="absolute z-10 bg-slate-600/60 w-full top-0 right-0 h-screen p-4 flex items-center justify-center" onClick={()=>closeModal('modal1')}>
         <div  onClick={(e)=> e.stopPropagation()} >
-         <CreateJobModal/>
+         <CreateJobModal onOpen={() => openModal('modal2')} onClose={()=>closeModal('modal1')}/>
         </div>
         </div>
       )}
       {modal2Visible && (
-        <JobApplicationModal/>
+        <div className="absolute z-10 bg-slate-600/60 w-full top-0 right-0 h-screen p-4 flex items-center justify-center" onClick={()=>closeModal('modal2')}>
+        <div  onClick={(e)=> e.stopPropagation()} >
+          <JobApplicationModal onOpen={() => openModal('modal3')} onClose={()=>closeModal('modal2')}/>
+        </div>
+        </div>
+       
       )}
-      {modal2Visible && (
-        <JobDescriptionModal/>
+      {modal3Visible && (
+        <div className="absolute z-10 bg-slate-600/60 w-full top-0 right-0 h-screen p-4 flex items-center justify-center" onClick={()=>closeModal('modal3')}>
+        <div  onClick={(e)=> e.stopPropagation()} >
+          <JobDescriptionModal onOpen={() => openModal('modal4')} onClose={()=>closeModal('modal3')}/>
+        </div>
+        </div>
+      
       )}
-      {modal2Visible && (
-        <JobInterviewModal/>
+      {modal4Visible && (
+         <div className="absolute z-10 bg-slate-600/60 w-full top-0 right-0 h-screen p-4 flex items-center justify-center" onClick={()=>closeModal('modal4')}>
+         <div  onClick={(e)=> e.stopPropagation()} >
+           <JobInterviewModal   onClose={()=>closeModal('modal4')}/>
+         </div>
+         </div>
+      
       )}
     </div>
   )
