@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import JobCard from '../Components/JobCard'
 import CreateJobModal from '../Components/Modals/CreateJobModal';
+import JobApplicationModal from '../Components/Modals/JobApplicationModal';
+import JobDescriptionModal from '../Components/Modals/JobDescriptionModal';
+import JobInterviewModal from '../Components/Modals/JobInterviewModal';
 
 
 
@@ -34,13 +37,19 @@ function Dashboard() {
 
       const [modal1Visible, setModal1Visible] = useState(false);
       const [modal2Visible, setModal2Visible] = useState(false);
+      const [modal3Visible, setModal3Visible] = useState(false);
+      const [modal4Visible, setModal4Visible] = useState(false);
     
       const openModal = (modalId) => {
         if (modalId === 'modal1') {
           setModal1Visible(true);
         } else if (modalId === 'modal2') {
           setModal2Visible(true);
-        }
+        }else if (modalId === 'modal3') {
+            setModal2Visible(true);
+          }else if (modalId === 'modal4') {
+            setModal2Visible(true);
+          }
       };
     
       const closeModal = (modalId) => {
@@ -48,25 +57,35 @@ function Dashboard() {
           setModal1Visible(false);
         } else if (modalId === 'modal2') {
           setModal2Visible(false);
-        }
+        }else if (modalId === 'modal2') {
+            setModal2Visible(false);
+          }else if (modalId === 'modal2') {
+            setModal2Visible(false);
+          }
       };
 
   return (
     <div className='ml-2 '>
-      <div className='w-full flex justify-between my-4 mr-2'> <h2 className='text-xl text-black font-semibold'>Active Jobs</h2> <div>Active<button></button></div> <button className='w-[167px] bg-black text-white py-[14px] px-38px rounded-lg mr-2'>Create Job</button></div>
+      <div className='w-full flex justify-between my-4 mr-2'> <h2 className='text-xl text-black font-semibold'>Active Jobs</h2> <div>Active<button></button></div> <button className='w-[167px] bg-black text-white py-[14px] px-38px rounded-lg mr-2' onClick={()=>openModal('modal1')}>Create Job</button></div>
        <div className=' flex gap-4 flex-wrap'>
        {jobData.map(item => <JobCard data={item}/>)}
        </div>
-       <button onClick={() => openModal('modal1')} className="bg-blue-500 text-white py-2 px-4 mt-4">Open Modal 1</button>
+    
       {modal1Visible && (
-         <CreateJobModal />
-      )}
-
-      {modal1Visible && (
-        <button onClick={() => openModal('modal2')} className="bg-green-500 text-white py-2 px-4 mt-4">Open Modal 2 from Modal 1</button>
+        <div className="absolute z-10 bg-slate-600/60 w-full top-0 right-0 h-screen p-4 flex items-center justify-center" onClick={()=>closeModal('modal1')}>
+        <div  onClick={(e)=> e.stopPropagation()} >
+         <CreateJobModal/>
+        </div>
+        </div>
       )}
       {modal2Visible && (
-        <Modal id="modal2" content={<p>Modal 2 Content</p>} onClose={() => closeModal('modal2')} />
+        <JobApplicationModal/>
+      )}
+      {modal2Visible && (
+        <JobDescriptionModal/>
+      )}
+      {modal2Visible && (
+        <JobInterviewModal/>
       )}
     </div>
   )
